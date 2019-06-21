@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.Step;
 
 import static org.hamcrest.Matchers.is;
 
-public class Steps {
+public class BoardsSteps {
     private String TRELLO_API = "https://api.trello.com/1";
     private String API_KEY = "a7cb57ab0749b69b3e7f69d64e53adca";
     private String TOKEN = "c27878f247341d8480067dc41024f4646353fdfb699b301c1b0d5106061ca7e1";
@@ -16,7 +16,7 @@ public class Steps {
 
 
     @Step
-    public void getAllOfTheCardsForABoard(String code){
+    public void getAllOfTheCardsForABoard(String boardId){
         response = SerenityRest.when().get(TRELLO_API + "/boards/" + boardId + "?fields=" + fields + "&key=" + API_KEY + "&token=" + TOKEN);
     }
 
@@ -26,8 +26,8 @@ public class Steps {
     }
 
     @Step
-    public void iShouldFindName(String name){
-        response.then().body("RestResponse.result.name", is(name));
+    public void iShouldFindName(String boardName){
+        response.then().body("RestResponse.result.name", is(boardName));
     }
 
 }
