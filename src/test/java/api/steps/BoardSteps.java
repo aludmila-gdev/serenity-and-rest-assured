@@ -8,7 +8,7 @@ import util.Trello;
 
 import static org.hamcrest.Matchers.is;
 
-public class BoardsSteps {
+public class BoardSteps {
 
     private Response response;
     String apiKey = Trello.getTRELLO_API_KEY();
@@ -18,7 +18,7 @@ public class BoardsSteps {
 
 
     @Step
-    public void buscaInformacoesDoBoardPorId(String boardId){
+    public void findABoardById(String boardId){
 
         response = SerenityRest
                 .given()
@@ -31,7 +31,7 @@ public class BoardsSteps {
     }
 
     @Step
-    public void buscaRealizadaComSucesso(){
+    public void actionIsExecutedSuccesfully(){
         response.then().statusCode(200);
     }
 
