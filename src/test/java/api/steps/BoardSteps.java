@@ -36,11 +36,6 @@ public class BoardSteps {
     }
 
     @Step
-    public void iShouldFindName(String boardName){
-        response.then().body("RestResponse.result.name", is(boardName));
-    }
-
-    @Step
     public void createABoardWithMinimalData(){
         response = SerenityRest
                 .given()
@@ -74,6 +69,8 @@ public class BoardSteps {
                 .and()
                 .body("prefs.permissionLevel",is("private"))
                 .and()
+                .body("shortUrl",notNullValue())
+                .and()
                 .body("closed",is(false));
 
     }
@@ -93,6 +90,13 @@ public class BoardSteps {
 
     @Step
     public void verifyFieldsOfClosedBoard(){
-
+        response.then()
+                .body("name",is("MyBoardTest1"))
+                .and()
+                .body("prefs.permissionLevel",is("private"))
+                .and()
+                .body("shortUrl",notNullValue())
+                .and()
+                .body("closed",is(true));
     }
 }
