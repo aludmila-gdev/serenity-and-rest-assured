@@ -2,8 +2,8 @@ package api.steps;
 import io.restassured.response.Response;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
-import util.Board;
-import util.Trello;
+import api.resources.Board;
+import api.resources.Trello;
 
 
 import static org.hamcrest.Matchers.is;
@@ -18,7 +18,7 @@ public class BoardSteps {
     private String boardPath = Board.getPath();
     private String boardFields = Board.getFields();
     private String currentBoardId;
-
+    private String currentBoardLink;
 
     @Step
     public void findABoardById(String boardId){
@@ -41,11 +41,11 @@ public class BoardSteps {
                 .given()
                 .queryParam("key", apiKey)
                 .queryParam("token", apiToken)
-                .queryParam("name","MyBoardTest1")
+                .queryParam("name","Public Board Test")
                 .queryParam("defaultLabels","true")
                 .queryParam("defaultLists", "true")
                 .queryParam("keepFromSource","none")
-                .queryParam("prefs_permissionLevel","private")
+                .queryParam("prefs_permissionLevel","public")
                 .queryParam("prefs_voting","disabled")
                 .queryParam("prefs_comments","members")
                 .queryParam("prefs_invitations","members")
@@ -59,15 +59,16 @@ public class BoardSteps {
 
 
         currentBoardId = response.jsonPath().getString("id");
+        currentBoardLink = response.jsonPath().getString("link");
 
     }
 
     @Step
     public void verifyFieldsOfACreatedBoard(){
         response.then()
-                .body("name",is("MyBoardTest1"))
+                .body("name",is("Public Board Test"))
                 .and()
-                .body("prefs.permissionLevel",is("private"))
+                .body("prefs.permissionLevel",is("public"))
                 .and()
                 .body("shortUrl",notNullValue())
                 .and()
@@ -91,12 +92,28 @@ public class BoardSteps {
     @Step
     public void verifyFieldsOfClosedBoard(){
         response.then()
-                .body("name",is("MyBoardTest1"))
+                .body("name",is("Public Board Test"))
                 .and()
-                .body("prefs.permissionLevel",is("private"))
+                .body("prefs.permissionLevel",is("public"))
                 .and()
                 .body("shortUrl",notNullValue())
                 .and()
                 .body("closed",is(true));
+    }
+
+    @Step
+    public void deletABoard(){
+        response = SerenityRest
+                .given()
+                .queryParam("key", apiKey)
+                .queryParam("token", apiToken)
+                .delete(apiPath + boardPath + currentBoardId ) ;
+
+    }
+
+    @Step
+    public String getCreatedBoardLink (){
+
+        return currentBoardLink;
     }
 }

@@ -1,4 +1,4 @@
-package util;
+package api.resources;
 
 public  class Trello {
     private  static String path;
