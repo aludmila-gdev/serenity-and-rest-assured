@@ -1,24 +1,24 @@
-package api.steps;
+package util;
 
 public  class Trello {
-    private  static String TRELLO_API_LINK;
-    private  static String TRELLO_API_KEY;
-    private  static String TRELLO_TOKEN;
+    private  static String path;
+    private  static String key;
+    private  static String token;
 
 
-    public static String getTRELLO_API_LINK() {
-        TRELLO_API_LINK = "https://api.trello.com/1";
-        return TRELLO_API_LINK;
+    public static String getPath() {
+        path = "https://api.trello.com/1";
+        return path;
     }
 
-    public static String getTRELLO_API_KEY() {
-        TRELLO_API_KEY = System.getenv("TRELLO_API_KEY");
-        return TRELLO_API_KEY;
+    public static String getKey() {
+        key = System.getenv("TRELLO_API_KEY");
+        return key;
     }
 
-    public static String getTRELLO_TOKEN() {
-        TRELLO_TOKEN = System.getenv("TRELLO_TOKEN");
+    public static String getToken() {
+        token = System.getenv("TRELLO_TOKEN");
 
-        return TRELLO_TOKEN;
+        return token;
     }
 }
