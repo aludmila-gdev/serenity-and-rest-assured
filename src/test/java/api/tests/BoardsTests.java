@@ -18,6 +18,7 @@ public class BoardsTests {
     BoardSteps boardSteps;
 
     @Test
+    @Ignore
     public void verifyThatWeCanCreateABoard(){
         boardSteps.createABoardWithMinimalData();
         boardSteps.actionIsExecutedSuccessfully();
@@ -33,6 +34,7 @@ public class BoardsTests {
     }
 
     @Test
+    @Ignore
     public void verifyThatWeCanCloseABoard(){
         boardSteps.createABoardWithMinimalData();
         boardSteps.actionIsExecutedSuccessfully();
