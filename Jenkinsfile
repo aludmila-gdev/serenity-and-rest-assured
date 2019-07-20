@@ -9,7 +9,7 @@ pipeline {
     stage('Tests') {
       steps {
         sh './gradlew clean test aggregate'
-        archiveArtifacts './target/site/serenity/index.html'
+        archiveArtifacts '/var/jenkins_home/workspace/Pipeline_Test_jenkins/target/site/serenity/index.html'
       }
     }
   }
