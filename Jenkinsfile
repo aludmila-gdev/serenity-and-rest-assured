@@ -9,6 +9,7 @@ pipeline {
     stage('Tests') {
       steps {
         sh './gradlew clean test aggregate'
+        archiveArtifacts './target/site/serenity/index.html'
       }
     }
   }
